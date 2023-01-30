@@ -1,0 +1,44 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Social Network{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'><link rel="stylesheet" href="./style.css">
+        <link href="{% static 'network/css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'network/css/login.css' %}" rel="stylesheet">
+        <link href="{% static 'network/css/tasks.css' %}" rel="stylesheet">
+        <link href="{% static 'network/css/teams.css' %}" rel="stylesheet">
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg py-5">
+                <ul class="navbar-nav m-auto">
+                    {% if user.is_authenticated %}
+                    <div class="row">
+                        <li class="col nav-item">
+                            <a class="nav_link button_header" href="{% url 'teams' %}">Teams</a>
+                        </li>
+                        <li class="col nav-item">
+                            <a class="nav_link button_header" href="{% url 'index' %}">Projects</a>
+                        </li>
+                        <li class="col nav-item">
+                            <a class="nav_link button_header" href="{% url 'tasks' %}">Tasks</a>
+                        </li>
+                        <li class="col nav-item">
+                            <a class="nav_link button_header border-dark" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </div>
+                    {% endif %}
+                </ul>
+        </nav>
+
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+            <script src="{% static 'js/main.js' %}"></script>
+        </div>
+    </body>
+</html>
