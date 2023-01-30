@@ -38,11 +38,14 @@ body {
 
 /* CARDS */
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  overflow-y: scroll;
-  height: 80vh;
+  margin: 0 auto;
+  overflow-x: scroll;
+  height: 90vh;
+  justify-content: center;
+}
+
+.cards::-webkit-scrollbar {
+  width: 0 !important;
 }
 
 .card {
@@ -61,6 +64,17 @@ body {
 .card:hover {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
   transform: scale(1.01);
+}
+
+.card.white_bg {
+  background-color: white;
+  border: none;
+}
+
+.card.white_bg:hover {
+  background-color: black;
+  border: 2px solid rgba(0, 0, 0, 0.164);
+  color: white;
 }
 
 .card__link,
