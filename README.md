@@ -3,7 +3,8 @@ A comprehensive project management platform where you can create and manage team
 
 
 # Requirements
-`pip install -r requirements.txt`
+- Python 3.11.1
+- `pip install -r requirements.txt`
 
 # Start
 - To load the page, you need to insert commands to compile the SASS:
