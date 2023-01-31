@@ -40,7 +40,7 @@ body {
 .cards {
   margin: 0 auto;
   overflow-x: scroll;
-  height: 90vh;
+  height: 80vh;
   justify-content: center;
 }
 
@@ -48,7 +48,7 @@ body {
   width: 0 !important;
 }
 
-.card {
+.card_task {
   margin: 20px;
   padding: 20px;
   width: 300px;
@@ -61,20 +61,19 @@ body {
   transition: all 0.2s;
 }
 
-.card:hover {
+.card_task:hover {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-  transform: scale(1.01);
+  transform: scale(1.06);
 }
 
-.card.white_bg {
+.card_task.white_bg {
   background-color: white;
-  border: none;
 }
 
-.card.white_bg:hover {
-  background-color: black;
+.card_task.white_bg:hover {
+  background-color: white;
   border: 2px solid rgba(0, 0, 0, 0.164);
-  color: white;
+  transform: scale(1.06);
 }
 
 .card__link,

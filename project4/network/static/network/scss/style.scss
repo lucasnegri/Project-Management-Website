@@ -1,3 +1,5 @@
+// python manage.py sass network/static/network/scss/ network/static/network/css/ --watch
+
 @import url('https://fonts.googleapis.com/css?family=Heebo:400,700|Open+Sans:400,700');
 
 :root {
@@ -13,7 +15,7 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: 'Open Sans';
-  background: #fafafa;
+  background: #ebebeb;
 }
 
 section::-webkit-scrollbar{
@@ -30,10 +32,18 @@ a {
   height: 80vh;
 }
 
-.team_card {
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.project_card {
   font-family: 'Heebo';
   --bg-filter-opacity: 0.5;
-  background-color: #7A83D1;
+  background-color: white;
   height: 18em;
   width: 13em;
   font-size: 1.5em;
@@ -53,40 +63,49 @@ a {
   text-decoration: none;
 }
 
-.team_card.white_bg{
+.project_card.white_bg{
   background-color: white;
   border: none
 }
 
-.team_card.white_bg:hover{
+.project_card.white_bg:hover{
   background-color: rgb(0, 0, 0);
   border: 2px solid rgba(0, 0, 0, 0.164);
   color: rgb(255, 255, 255);
 }
 
-.team_card:hover {
-  transform: rotate(0);
-  transform: scale(1.05);
+.project_card.white_bg:after {
+  background-color: white;
 }
 
-.team_card h1 {
+.project_card:hover {
+  transform: rotate(0);
+  transform: scale(1.05);
+  border: 3px solid #7A83D1;
+}
+
+.project_card:hover h1 p {
+  color: #7A83D1;
+}
+
+.project_card h1 {
   margin: 0;
   font-size: 1.5em;
   line-height: 1.2em;
 }
 
-.team_card p {
+.project_card p {
   font-size: 0.75em;
   font-family: 'Open Sans';
   margin-top: 0.5em;
   line-height: 2em;
 }
 
-.team_card .tags {
+.project_card .tags {
   display: flex;
 }
 
-.team_card .tags .tag {
+.project_card .tags .tag {
   font-size: 0.75em;
   background: rgba(255,255,255,0.5);
   border-radius: 0.3rem;
@@ -97,12 +116,12 @@ a {
 }
 
 
-.team_card:hover .tags .tag {
+.project_card:hover .tags .tag {
   background: var(--color);
   color: white;
 }
 
-.team_card .date {
+.project_card .date {
   position: absolute;
   top: 0;
   right: 0;
@@ -112,7 +131,7 @@ a {
   opacity: .8;
 }
 
-.team_card:before, .team_card:after {
+.project_card:before, .project_card:after {
   content: '';
   transform: scale(0);
   transform-origin: top left;
@@ -125,23 +144,48 @@ a {
   transition-timing-function: ease-in-out;
 }
 
-.team_card:before {
-  background: #ddd;
+.project_card:before {
+  background: #7A83D1;
   width: 250%;
   height: 250%;
 }
 
-.team_card:after {
-  background: white;
+.project_card:after {
+  background: rgb(255, 255, 255);
   width: 200%;
   height: 200%;
 }
 
-.team_card:hover {
+.project_card.white_bg:before {
+  background: #000000;
+  width: 250%;
+  height: 250%;
+}
+
+.project_card.white_bg:after {
+  background: rgb(255, 255, 255);
+  width: 200%;
+  height: 200%;
+}
+
+.project_card.white_bg:before, .project_card.white_bg:after {
+  content: '';
+  transform: scale(0);
+  transform-origin: top left;
+  border-radius: 50%;
+  position: absolute;
+  left: -50%;
+  top: -50%;
+  z-index: -5;
+  transition: all, var(--transition-time);
+  transition-timing-function: ease-in-out;
+}
+
+.project_card:hover {
   color: var(--color);
 }
 
-.team_card:hover:before, .team_card:hover:after {
+.project_card:hover:before, .project_card:hover:after {
   transform: scale(1);
 }
 
@@ -193,7 +237,7 @@ a {
   .cards-wrapper {
     padding: 4rem 2rem;
   }
-  .team_card {
+  .project_card {
     max-width: calc(100vw - 4rem);
   }
 }

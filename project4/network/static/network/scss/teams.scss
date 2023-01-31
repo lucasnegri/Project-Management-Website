@@ -2,7 +2,7 @@
 
 // python manage.py sass network/static/network/scss/ network/static/network/css/
 
-/// PROJECTS PAGE  ///
+/// teamS PAGE  ///
 
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
@@ -10,16 +10,16 @@
 	box-sizing: border-box;
 }
 
-.projects_wrapper {
+.teams_wrapper {
     overflow-y: scroll;
     height: 80vh;
 }
 
-.projects_wrapper::-webkit-scrollbar{
+.teams_wrapper::-webkit-scrollbar{
 	width: 0 !important
 }
 
-.project_container{
+.team_container{
 	background-image: #DDDDDD;
 	font-family: 'Muli', sans-serif;
 	display: flex;
@@ -30,7 +30,7 @@
 }
 
 
-.project {
+.team {
 	background-color: #fff;
 	border-radius: 10px;
 	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
@@ -40,26 +40,34 @@
 	overflow: hidden;
 	width: 700px;
 }
-.project:hover {
+.team:hover {
 	transform: scale(1.05);
-
 }
 
-.project h6 {
+.team.white_bg{
+	width: 250px;
+}
+.team.white_bg:hover {
+	transform: scale(1.05);
+	border: 2px solid rgba(0, 0, 0, 0.164);
+}
+
+
+.team h6 {
 	opacity: 0.6;
 	margin: 0;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 }
 
-.project h2 {
+.team h2 {
 	letter-spacing: 1px;
 	margin: 10px 0;
 	font-size: 24px;
 	text-align: left;
 }
 
-.project-preview {
+.team-preview {
 	background-color: #7A83D1;
 	color: #fff;
 	padding: 30px;
@@ -67,7 +75,7 @@
 }
 
 
-.project-preview a {
+.team-preview a {
 	color: #fff;
 	display: inline-block;
 	font-size: 12px;
@@ -76,7 +84,7 @@
 	text-decoration: none;
 }
 
-.project-info {
+.team-info {
 	padding: 30px;
 	position: relative;
 	width: 100%;
@@ -114,7 +122,7 @@
 	letter-spacing: 1px;
 }
 
-.btn {
+.btn_team {
 	background-color: #3D4D8F;
 	border: 0;
 	border-radius: 50px;

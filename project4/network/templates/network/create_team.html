@@ -1,0 +1,29 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+  <div class="pt-5"></div>
+  <div class="pt-5"></div>
+  <div class="pt-2"></div>
+  <div class="container form_card m-auto p-5">
+    <form class="m-2">
+      <h2 class="pb-3">Create your team</h2>
+      <div class="form-group">
+        <label for="team_input">Name</label>
+        <input type="text" class="form-control" id="team_input" placeholder="Write a name for your team">
+      </div>
+      <div class="form-group">
+          <label for="objective_input">Objectives</label>
+          <textarea class="form-control" id="objective_input" rows="3"></textarea>
+      </div>
+      <div class="form-group d-flex justify-content-center">
+        Select your color:  &nbsp; &nbsp; <button class="jscolor rounded" name="color" type="button" data-current-color="#E4FF3A80" style="min-width: 32px !important; background-image: linear-gradient(to right, rgba(228, 255, 58, 0.5) 0%, rgba(228, 255, 58, 0.5) 100%), url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAADBJREFUOE9jnDlz5n8GPODs2bP4pBkYRw0YFmGQlpaGNx0YGxvjTwejBjAwDv0wAADeiz/pRWnBmQAAAABJRU5ErkJggg==&quot;) !important; background-position: left top, left top !important; background-size: auto, 16px 16px !important; background-repeat: repeat, repeat !important; background-origin: padding-box, padding-box !important;">&nbsp;</button>
+      </div>
+      <div class="form-group d-flex justify-content-center pt-4">
+        <button type="submit" class="btn btn-dark" align="center">Create team</button>
+      </div>
+    </form>
+  </div>
+
+{% endblock %}

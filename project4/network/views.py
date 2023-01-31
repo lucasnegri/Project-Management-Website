@@ -6,17 +6,48 @@ from django.urls import reverse
 
 from .models import User
 
+#------------------------------------------------------------------------------------#
 
+
+## Define path to load the main page (projects)
 def index(request):
     return render(request, "network/index.html")
 
+## Define path to load the create project formulary
+def create_project(request):
+    return render(request, "network/create_project.html")
+
+
+#------------------------------------------------------------------------------------#
+
+
+## Define path to load the tasks page
 def tasks(request):
     return render(request, "network/tasks.html")
 
+## Define path to load the create task formulary
+def create_task(request):
+    return render(request, "network/create_task.html")
+
+
+#------------------------------------------------------------------------------------#
+
+
+## Define path to load the teams page
 def teams(request):
     return render(request, "network/teams.html")
 
+## Define path to load the create team formulary
+def create_team(request):
+    return render(request, "network/create_team.html")
 
+
+
+#------------------------------------------------------------------------------------#
+
+
+
+## Define path to the login page
 def login_view(request):
     if request.method == "POST":
 
@@ -36,12 +67,12 @@ def login_view(request):
     else:
         return render(request, "network/login.html")
 
-
+## Define path to the logout route 
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("login"))
 
-
+## Define path to the register route 
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]

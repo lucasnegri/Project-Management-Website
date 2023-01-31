@@ -1,0 +1,8 @@
+.form_card {
+  background-color: white;
+  max-width: max-content;
+}
+
+#form_wrapper {
+  border-radius: 30px;
+}
