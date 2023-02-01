@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
+from .models import User, Team, Project, Task
 
 from .models import User
 
@@ -40,15 +41,26 @@ def teams(request):
 ## Define path to load the create team formulary
 def create_team(request):
     if request.method == "GET":
-        return render(request, "network/create_team.html")
+        registered_users = User.objects.all()
+        registered_list = [{"username": user.username} for user in registered_users]
+        
+        objects = {
+            "registered_list": registered_list
+        }
+        return render(request, "network/create_team.html", objects)
     else:
+        user = User.objects.get(pk=request.user.id)
+
         name = request.POST["team_name"]
         objective = request.POST["team_objective"]
         color = request.POST["team_color"]
-        users = request.POST.getlist("user[]")
+        selected_users = request.POST.getlist("user[]")
 
-        current_user = request.user
-        return JsonResponse([name, objective, color, users], safe=False)
+        team = Team(name=name, objective=objective, color=color)
+        team.save()
+
+        registered_users = User.objects.all()
+        return HttpResponseRedirect(reverse(index))
         
 
 

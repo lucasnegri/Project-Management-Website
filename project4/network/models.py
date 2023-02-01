@@ -5,8 +5,34 @@ from django.db import models
 class User(AbstractUser):
     pass
 
+
 class Team(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
     objective = models.TextField()
-    color = models.CharField(max_length=50)
-    selected_users = models.ManyToManyField(User, related_name='teams')
+    color = models.CharField(max_length=7)
+    users = models.ManyToManyField(User, related_name="participants")
+    
+    def save(self, *args, **kwargs):
+        self.color = self.color.lower()
+        super().save(*args, **kwargs)
+
+
+class Project(models.Model):
+    name = models.CharField(max_length=255)
+    objective = models.TextField()
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    color = models.CharField(max_length=7, default=None, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.color = self.team.color.lower()
+        super().save(*args, **kwargs)
+
+class Task(models.Model):
+    name = models.CharField(max_length=255)
+    objective = models.TextField()
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    color = models.CharField(max_length=7, default=None, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.color = self.project.color.lower()
+        super().save(*args, **kwargs)
