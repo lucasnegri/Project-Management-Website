@@ -3,25 +3,73 @@
 
 
 {% block body %}
-  <div class="pt-5"></div>
-  <div class="pt-5"></div>
-  <div class="pt-2"></div>
-  <div class="container form_card m-auto p-5">
-    <form class="m-2">
+  <div class="pt-3"></div>
+  <div class="container form_card m-auto px-5 py-3">
+  <!--CREATE TEAM FORMULARY-->
+    <form id="create_team" action="{% url 'create_team' %}" method="post" class="m-2">
+      {% csrf_token %}
       <h2 class="pb-3">Create your team</h2>
+      
+      <!--Team Name-->
       <div class="form-group">
         <label for="team_input">Name</label>
-        <input type="text" class="form-control" id="team_input" placeholder="Write a name for your team">
+        <input type="text" class="form-control" id="team_input" name="team_name" placeholder="Write a name for your team">
       </div>
+
+      <!--Team Objective-->
       <div class="form-group">
           <label for="objective_input">Objectives</label>
-          <textarea class="form-control" id="objective_input" rows="3"></textarea>
+          <textarea class="form-control" id="objective_input" name="team_objective" rows="2"></textarea>
       </div>
-      <div class="form-group d-flex justify-content-center">
-        Select your color:  &nbsp; &nbsp; <button class="jscolor rounded" name="color" type="button" data-current-color="#E4FF3A80" style="min-width: 32px !important; background-image: linear-gradient(to right, rgba(228, 255, 58, 0.5) 0%, rgba(228, 255, 58, 0.5) 100%), url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAADBJREFUOE9jnDlz5n8GPODs2bP4pBkYRw0YFmGQlpaGNx0YGxvjTwejBjAwDv0wAADeiz/pRWnBmQAAAABJRU5ErkJggg==&quot;) !important; background-position: left top, left top !important; background-size: auto, 16px 16px !important; background-repeat: repeat, repeat !important; background-origin: padding-box, padding-box !important;">&nbsp;</button>
+
+      <!--Team Color Picker-->
+      <div class="form-group d-flex">
+        <label for="colorpicker">Team Color: &nbsp;&nbsp;&nbsp;</label>
+        <input class="rounded" type="color" id="colorpicker" name="team_color" value="#0000ff">
       </div>
-      <div class="form-group d-flex justify-content-center pt-4">
-        <button type="submit" class="btn btn-dark" align="center">Create team</button>
+ 
+      <!--User checkbox-->
+      <div class="card-body pt-2">
+        <div class="d-flex align-items-center mb-4 pb-4 border-bottom">
+            <div class="ms-3">
+                <h5 class="text-uppercase fw-weight-bold mb-0">Users</h5>
+            </div>
+        </div>
+        <div id="user_checkbox">
+          <div class="form-check mb-1">
+              <input class="form-check-input" id="flexCheck1" name="user[]" value="user1" type="checkbox">
+              <label class="form-check-label" for="flexCheck1"><span class="fst-italic pl-1">User1</span></label>
+          </div>
+          <div class="form-check mb-1">
+              <input class="form-check-input" id="flexChec2"  name="user[]" value="user2"type="checkbox">
+              <label class="form-check-label" for="flexChec2"><span class="fst-italic pl-1">User2</span></label>
+          </div>
+          <div class="form-check mb-1">
+              <input class="form-check-input" id="flexCheck3" name="user[]" value="user3" type="checkbox">
+              <label class="form-check-label" for="flexCheck3"><span class="fst-italic pl-1">User3</span></label>
+          </div>
+          <div class="form-check mb-1">
+              <input class="form-check-input" id="flexCheck4" name="user[]" value="user4" type="checkbox">
+              <label class="form-check-label" for="flexCheck4"><span class="fst-italic pl-1">User4</span></label>
+          </div>
+          <div class="form-check mb-1">
+              <input class="form-check-input" id="flexCheck5" name="user[]" value="user5" type="checkbox">
+              <label class="form-check-label" for="flexCheck5"><span class="fst-italic pl-1">User5</span></label>
+          </div>
+          <div class="form-check mb-1">
+              <input class="form-check-input" id="flexCheck6" name="user[]" value="user6" type="checkbox">
+              <label class="form-check-label" for="flexCheck6"><span class="fst-italic pl-1">User6</span></label>
+          </div>
+          <div class="form-check mb-1">
+              <input class="form-check-input" id="flexCheck7" name="user[]" value="user7" type="checkbox">
+              <label class="form-check-label" for="flexCheck7"><span class="fst-italic pl-1">User7</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!--Submit button-->
+      <div class="d-flex justify-content-center pt-2">
+        <button type="submit" class="btn btn-dark">Create team</button>
       </div>
     </form>
   </div>

@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -39,7 +39,17 @@ def teams(request):
 
 ## Define path to load the create team formulary
 def create_team(request):
-    return render(request, "network/create_team.html")
+    if request.method == "GET":
+        return render(request, "network/create_team.html")
+    else:
+        name = request.POST["team_name"]
+        objective = request.POST["team_objective"]
+        color = request.POST["team_color"]
+        users = request.POST.getlist("user[]")
+
+        current_user = request.user
+        return JsonResponse([name, objective, color, users], safe=False)
+        
 
 
 
