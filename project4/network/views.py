@@ -19,23 +19,45 @@ def create_project(request):
     if request.method == "GET":
         current_user = request.user
         user_teams = current_user.teams.all()
+    
+        registered_users = User.objects.all()
+        registered_list = [{"username": user.username} for user in registered_users]
+        
         context = {
-            'user_teams': user_teams
+            "registered_list": registered_list,
+            'user_teams': user_teams,
         }
         return render(request, "network/create_project.html", context)
     else:
-        name = request.POST["project_name"]
-        objective = request.POST["project_objective"]
-        selected_team = Team.objects.get(id=request.POST["selected_team"])
-        selected_users = selected_team.members.all()
-        project = Project(name=name, objective=objective, team=selected_team)
-        project.save()
-        project.members.set(selected_users)
-        project.save()
+        name = request.POST.get("project_name")
+        objective = request.POST.get("project_objective")
+        selected_team = request.POST.get("selected_team")
+        selected_users_ids = request.POST.getlist("selected_users")
 
-        return 
+        selected_team = Team.objects.get(id=selected_team)
+        selected_users = User.objects.filter(id__in=selected_users_ids)
 
-#------------------------------------------------------------------------------------#
+        selected_team_dict = {"id": selected_team.id, "name": selected_team.name}
+        selected_users_list = [{"id": user.id, "username": user.username} for user in selected_users]
+
+        project = {
+            "project_name":name,
+            "project_objective":objective,
+            "selected_users": selected_users_list,
+            "selected_team": selected_team_dict,
+        }
+
+        return JsonResponse(project)
+
+def get_team_users(request, team_id):
+    team = Team.objects.get(id=team_id)
+    users = team.members.all()
+    data = {
+        "users": [{"username": user.username, "id": user.id} for user in users]
+    }
+    return JsonResponse(data)
+
+#-------------------------------------------------------------------------------------------#
 
 
 ## Define path to load the tasks page

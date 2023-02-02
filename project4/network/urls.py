@@ -7,6 +7,10 @@ urlpatterns = [
     ## Define paths for the main projects page and create project formulary
     path("", views.index, name="index"),
     path("create_project", views.create_project, name="create_project"),
+    path("get_team_users/<int:team_id>", views.get_team_users, name="get_team_users"),
+
+
+
 
     ## Define paths for the login, logout and register route 
     path("login", views.login_view, name="login"),

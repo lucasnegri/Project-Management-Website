@@ -39,11 +39,11 @@
                 </ul>
         </nav>
 
-        
-            {% block body %}
-            {% endblock %}
-            <script src="{% static 'js/main.js' %}"></script>
-            <script src="{% static 'js/jscolor.js' %}"></script>
-            <script src="{% static 'js/jquery.min.js' %}"></script>
+        {% block body %}
+        {% endblock %}
+
+        <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
+        <script src="{% static 'js/jscolor.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
     </body>
 </html>
