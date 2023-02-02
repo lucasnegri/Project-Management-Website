@@ -13,7 +13,7 @@
       <!--Team Name-->
       <div class="form-group">
         <label for="team_input">Name</label>
-        <input type="text" class="form-control" id="team_input" name="team_name" placeholder="Write a name for your team">
+        <input type="text" class="form-control" id="team_input" name="team_name" placeholder="Write a name for your team"  maxlength="15">
       </div>
 
       <!--Team Objective-->
@@ -39,7 +39,7 @@
         <div id="user_checkbox">
           {% for user in registered_list %}
             <div class="form-check mb-1">
-                <input class="form-check-input" id="flexCheck1" name="user[]" value="{{ user.id }}" type="checkbox">
+                <input class="form-check-input" id="flexCheck1" name="user[]" value="{{ user.username }}" type="checkbox">
                 <label class="form-check-label" for="flexCheck1"><span class="fst-italic pl-1">{{ user.username }}</span></label>
             </div>
           {% endfor %}

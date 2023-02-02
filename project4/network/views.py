@@ -36,7 +36,12 @@ def create_task(request):
 
 ## Define path to load the teams page
 def teams(request):
-    return render(request, "network/teams.html")
+    current_user = request.user
+    teams = current_user.teams.all()
+    context = {
+        'teams': teams
+    }
+    return render(request, "network/teams.html", context)
 
 ## Define path to load the create team formulary
 def create_team(request):
@@ -49,19 +54,26 @@ def create_team(request):
         }
         return render(request, "network/create_team.html", objects)
     else:
-        user = User.objects.get(pk=request.user.id)
-
         name = request.POST["team_name"]
         objective = request.POST["team_objective"]
         color = request.POST["team_color"]
-        selected_users = request.POST.getlist("user[]")
+        selected_users = User.objects.filter(username__in=request.POST.getlist("user[]"))
+        selected_list = request.POST.getlist("user[]")
+
 
         team = Team(name=name, objective=objective, color=color)
         team.save()
+        team.members.set(selected_users)
+        team.save()
 
         registered_users = User.objects.all()
-        return HttpResponseRedirect(reverse(index))
         
+        current_user = request.user
+        teams = current_user.teams.all()
+        context = {
+            'teams': teams
+        }
+        return render(request, "network/teams.html", context)
 
 
 

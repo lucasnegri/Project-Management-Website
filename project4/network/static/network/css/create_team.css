@@ -1,21 +1,9 @@
 .form_card {
   background-color: white;
-  width: 500px;
-  min-width: max-content;
+  max-width: max-content;
   border-radius: 30px;
 }
 
 #form_wrapper {
   border-radius: 30px;
 }
-
-
-#user_checkbox {
-  max-height: 150px;
-  overflow-y: auto;
-}
-
-#colorpicker {
-  border: none;
-}
-
