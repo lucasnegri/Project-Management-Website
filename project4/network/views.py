@@ -16,8 +16,24 @@ def index(request):
 
 ## Define path to load the create project formulary
 def create_project(request):
-    return render(request, "network/create_project.html")
+    if request.method == "GET":
+        current_user = request.user
+        user_teams = current_user.teams.all()
+        context = {
+            'user_teams': user_teams
+        }
+        return render(request, "network/create_project.html", context)
+    else:
+        name = request.POST["project_name"]
+        objective = request.POST["project_objective"]
+        selected_team = Team.objects.get(id=request.POST["selected_team"])
+        selected_users = selected_team.members.all()
+        project = Project(name=name, objective=objective, team=selected_team)
+        project.save()
+        project.members.set(selected_users)
+        project.save()
 
+        return 
 
 #------------------------------------------------------------------------------------#
 
@@ -58,8 +74,6 @@ def create_team(request):
         objective = request.POST["team_objective"]
         color = request.POST["team_color"]
         selected_users = User.objects.filter(username__in=request.POST.getlist("user[]"))
-        selected_list = request.POST.getlist("user[]")
-
 
         team = Team(name=name, objective=objective, color=color)
         team.save()

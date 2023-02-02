@@ -99,7 +99,7 @@
 
 .progress::after {
   border-radius: 3px;
-  background-color: #000000;
+  background-color: #393737;
   content: '';
   position: absolute;
   top: 0;

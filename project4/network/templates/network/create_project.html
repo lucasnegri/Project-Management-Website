@@ -1,6 +1,66 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 
 {% block body %}
-Create Project
+  <div class="pt-3"></div>
+  <div class="container form_card m-auto px-5 py-3">
+  <!--CREATE PROJECT FORMULARY-->
+    <form id="create_project" action="{% url 'create_project' %}" method="post" class="m-2">
+      {% csrf_token %}
+      <h2 class="pb-3">Create your Project</h2>
+      
+      <!--List of teams that the user is in-->
+      {% for team in user_teams %}
+      <div class="form-check">
+        <input class="form-check-input team-radio" type="radio" name="project_team" id="radio_{{ team.name }}" value="{{ team.name }}">
+        <label class="form-check-label" for="radio_{{ team.name }}">
+          {{ team.name }}
+        </label>
+      </div>
+      {% endfor %}
+    
+      <!--Project Name-->
+      <div class="form-group">
+        <label for="project_input">Name</label>
+        <input type="text" class="form-control" id="project_input" name="project_name" placeholder="Write a name for your project"  maxlength="15">
+      </div>
+
+      <!--Project Objective-->
+      <div class="form-group">
+          <label for="objective_input">Objectives</label>
+          <textarea class="form-control" id="objective_input" name="project_objective" rows="2"></textarea>
+      </div>
+
+      <!--Users list-->
+      <div class="card-body pt-2">
+        <div class="d-flex align-items-center mb-4 pb-4 border-bottom">
+            <div class="ms-3">
+                <h5 class="text-uppercase fw-weight-bold mb-0">Users</h5>
+            </div>
+        </div>
+        <!--Users checkboxes-->
+        <div id="user_checkbox">
+          {% for user in registered_list %}
+            <div class="form-check mb-1">
+                <input class="form-check-input" id="flexCheck1" name="user[]" value="{{ user.username }}" type="checkbox">
+                <label class="form-check-label" for="flexCheck1"><span class="fst-italic pl-1">{{ user.username }}</span></label>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!--Submit button-->
+      <div class="d-flex justify-content-center pt-2">
+        <button type="submit" class="btn btn-dark">Create project</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      console.log("jQuery is working!");
+    });
+  </script>
+
 {% endblock %}
