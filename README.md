@@ -7,7 +7,7 @@ A comprehensive project management platform where you can create and manage team
 - `pip install -r requirements.txt`
 
 # Start
-- To load the page, you need to insert commands to compile the SASS:
+- To load the page, you need to insert commands to compile the SASS style:
 `python manage.py sass network/static/network/scss/ network/static/network/css/`
 
 - Then, we should collect that data:
