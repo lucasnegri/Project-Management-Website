@@ -19,13 +19,14 @@ def create_project(request):
     if request.method == "GET":
         current_user = request.user
         user_teams = current_user.teams.all()
-    
+        default_team = user_teams.first()
+        default_team_members = default_team.members.all()
         registered_users = User.objects.all()
         registered_list = [{"username": user.username} for user in registered_users]
         
         context = {
             "registered_list": registered_list,
-            'user_teams': user_teams,
+            "user_teams": user_teams,
         }
         return render(request, "network/create_project.html", context)
     else:
