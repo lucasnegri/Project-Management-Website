@@ -42,7 +42,7 @@
         <div id="user_checkbox">
           {% for user in user_list %}
                 <div class="form-check mb-1">
-                    <input id="user_{{ user.id }}" class="form-check-input" id="flexCheck1" name="user[]" value="{{ user.username }}" type="checkbox">
+                    <input class="form-check-input" id="flexCheck1" name="user[]" value="{{ user.id }}" type="checkbox">
                     <label class="form-check-label" for="flexCheck1"><span class="fst-italic pl-1">{{ user.username }}</span></label>
                 </div>
           {% endfor %}

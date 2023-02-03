@@ -33,22 +33,24 @@ def create_project(request):
         name = request.POST.get("project_name")
         objective = request.POST.get("project_objective")
         selected_team = request.POST.get("selected_team")
-        selected_users_ids = request.POST.getlist("selected_users")
-
         selected_team = Team.objects.get(id=selected_team)
-        selected_users = User.objects.filter(id__in=selected_users_ids)
-
         selected_team_dict = {"id": selected_team.id, "name": selected_team.name}
-        selected_users_list = [{"id": user.id, "username": user.username} for user in selected_users]
+        
+        selected_users = User.objects.filter(username__in=request.POST.getlist("user[]"))
 
-        project = {
+        project = Project(name=name, objective=objective, team=selected_team)
+        project.save()
+        project.members.set(selected_users)
+        project.save()
+
+        context = {
             "project_name":name,
             "project_objective":objective,
-            "selected_users": selected_users_list,
+            "selected_users": selected_users,
             "selected_team": selected_team_dict,
         }
 
-        return JsonResponse(project)
+        return render(request, "network/index.html", context)
 
 def get_team_users(request, team_id):
     team = Team.objects.get(id=team_id)
