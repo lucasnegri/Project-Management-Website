@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Heebo:400,700|Open+Sans:400,700");
 :root {
-  --color: #7A83D1;
+  --color: #f10404;
   --transition-time: 0.5s;
 }
 
@@ -74,11 +74,7 @@ a {
 .project_card:hover {
   transform: rotate(0);
   transform: scale(1.05);
-  border: 3px solid #7A83D1;
-}
-
-.project_card:hover h1 p {
-  color: #7A83D1;
+  border: 3px solid #000000;
 }
 
 .project_card h1 {
@@ -137,7 +133,7 @@ a {
 }
 
 .project_card:before {
-  background: #7A83D1;
+  background: #030f79;
   width: 250%;
   height: 250%;
 }

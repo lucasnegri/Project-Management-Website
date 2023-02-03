@@ -12,29 +12,25 @@
       
       <!--Team Name-->
       <div class="form-group">
-        <label for="team_input">Name</label>
+        <label for="team_input"><b>Name</b></label>
         <input type="text" class="form-control" id="team_input" name="team_name" placeholder="Write a name for your team"  maxlength="15">
       </div>
 
       <!--Team Objective-->
       <div class="form-group">
-          <label for="objective_input">Objectives</label>
+          <label for="objective_input"><b>Objectives</b></label>
           <textarea class="form-control" id="objective_input" name="team_objective" rows="2"></textarea>
       </div>
 
       <!--Team Color Picker-->
       <div class="form-group d-flex">
-        <label for="colorpicker">Team Color: &nbsp;&nbsp;&nbsp;</label>
+        <label for="colorpicker"><b>Team Color: &nbsp;&nbsp;&nbsp;</b></label>
         <input class="rounded" type="color" id="colorpicker" name="team_color" value="#0000ff">
       </div>
 
       <!--Users list-->
-      <div class="card-body pt-2">
-        <div class="d-flex align-items-center mb-4 pb-4 border-bottom">
-            <div class="ms-3">
-                <h5 class="text-uppercase fw-weight-bold mb-0">Users</h5>
-            </div>
-        </div>
+      <div class="pt-2">
+        <label for="user_checkbox"><b>User</b></label>
         <!--Users checkboxes-->
         <div id="user_checkbox">
           {% for user in registered_list %}

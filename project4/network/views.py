@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import User, Team, Project, Task
 
@@ -12,7 +12,12 @@ from .models import User
 
 ## Define path to load the main page (projects)
 def index(request):
-    return render(request, "network/index.html")
+    current_user = request.user
+    projects = current_user.projects.all()
+    context = {
+        'projects': projects
+    }
+    return render(request, "network/index.html", context)
 
 ## Define path to load the create project formulary
 def create_project(request):
@@ -50,7 +55,7 @@ def create_project(request):
             "selected_team": selected_team_dict,
         }
 
-        return render(request, "network/index.html", context)
+        return redirect(index)
 
 def get_team_users(request, team_id):
     team = Team.objects.get(id=team_id)

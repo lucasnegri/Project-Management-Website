@@ -12,78 +12,27 @@
         </a>
     </div>
 
+    {% for project in projects %}
     <div class="card-grid-space col pb-4">
-    <a class="project_card m-auto">
-        <div>
-        <h1>HTML Syntax</h1>
-        <p>The syntax of a language is how it works. How to actually write it. Learn HTML syntax…</p>
-        <div class="date">6 Oct 2017</div>
-        <div class="tags">
-            <div class="tag">HTML</div>
-        </div>
-        </div>
-    </a>
-    </div>
-    <div class="card-grid-space col pb-4">
-        <a class="project_card m-auto">
-        <div>
-            <h1>HTML Syntax</h1>
-            <p>The syntax of a language is how it works. How to actually write it. Learn HTML syntax…</p>
+        <a class="project_card m-auto project_{{ project.id }}" style="border-color: {{ project.color }}; border-width: 2px;">
+            <style>
+                .project_{{ project.id }}::before{
+                    background: {{ project.color }};
+                    width: 250%;
+                    height: 250%;
+                }
+            </style>
+            <div>
+            <h1>{{ project.name }}</h1>
+            <p>{{ project.objective}}</p>   
             <div class="date">6 Oct 2017</div>
             <div class="tags">
-            <div class="tag">HTML</div>
+                <div class="btn text-white" style="background-color: {{ project.color }};">Manage that project</div>
             </div>
-        </div>
+            </div>
         </a>
     </div>
-    <div class="card-grid-space col pb-4">
-        <a class="project_card m-auto">
-        <div>
-            <h1>HTML Syntax</h1>
-            <p>The syntax of a language is how it works. How to actually write it. Learn HTML syntax…</p>
-            <div class="date">6 Oct 2017</div>
-            <div class="tags">
-            <div class="tag">HTML</div>
-            </div>
-        </div>
-        </a>
-    </div>
-    <div class="card-grid-space col pb-4">
-        <a class="project_card m-auto">
-        <div>
-            <h1>HTML Syntax</h1>
-            <p>The syntax of a language is how it works. How to actually write it. Learn HTML syntax…</p>
-            <div class="date">6 Oct 2017</div>
-            <div class="tags">
-            <div class="tag">HTML</div>
-            </div>
-        </div>
-        </a>
-    </div>
-    <div class="card-grid-space col pb-4">
-        <a class="project_card m-auto">
-        <div>
-            <h1>HTML Syntax</h1>
-            <p>The syntax of a language is how it works. How to actually write it. Learn HTML syntax…</p>
-            <div class="date">6 Oct 2017</div>
-            <div class="tags">
-            <div class="tag">HTML</div>
-            </div>
-        </div>
-        </a>
-    </div>
-    <div class="card-grid-space col pb-4">
-        <a class="project_card  mt-3 m-auto">
-        <div>
-            <h1>HTML Syntax</h1>
-            <p>The syntax of a language is how it works. How to actually write it. Learn HTML syntax…</p>
-            <div class="date">6 Oct 2017</div>
-            <div class="tags">
-            <div class="tag">HTML</div>
-            </div>
-        </div>
-        </a>
-    </div>
+    {% endfor %}
 </section>
 
 
