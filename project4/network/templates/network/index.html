@@ -15,25 +15,38 @@
     {% for project in projects %}
     <div class="card-grid-space col pb-4">
         <a class="project_card m-auto project_{{ project.id }}" style="border-color: {{ project.color }}; border-width: 2px;">
+            <div>
+                <h1>{{ project.name }}</h1>
+                <p>{{ project.objective }}</p>   
+                <div class="date">6 Oct 2017</div>
+                <div class="tags">
+                    <div class="btn task_button text-white mx-2" style="background-color: {{ project.color }}"; onclick="viewTasks({{project.id}})">View Tasks</div>
+                    <div class="btn task_button text-white mx-2" style="background-color: {{ project.color }}"; onclick="createTask({{project.id}})">Create Task</div>
+                </div>
+            </div>
             <style>
-                .project_{{ project.id }}::before{
+                .project_{{ project.id }}::before {
                     background: {{ project.color }};
                     width: 250%;
                     height: 250%;
                 }
+                
             </style>
-            <div>
-            <h1>{{ project.name }}</h1>
-            <p>{{ project.objective}}</p>   
-            <div class="date">6 Oct 2017</div>
-            <div class="tags">
-                <div class="btn text-white" style="background-color: {{ project.color }};">Manage that project</div>
-            </div>
-            </div>
         </a>
     </div>
     {% endfor %}
 </section>
+
+<script>
+function viewTasks(projectId) {
+    window.location.href = "/project_tasks/" + projectId + "/";
+}
+
+function createTask(projectId) {
+    window.location.href = "{% url 'create_task' %}" + "?project_id=" + projectId;
+}
+</script>
+
 
 
 {% endblock %}

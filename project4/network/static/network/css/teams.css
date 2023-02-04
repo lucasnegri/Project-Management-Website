@@ -127,3 +127,8 @@
   right: 30px;
   letter-spacing: 1px;
 }
+
+.btn_team:hover {
+  color: #fff;
+  transform: scale(1.03);
+}

@@ -6,52 +6,16 @@
 <div class="main-container m-auto w-75">
     <div class="cards row">
 
-        <a href="{% url 'create_task' %}" class="pb-5" style="margin: 0">
-            <div class="card_task white_bg h-100" style="display: flex;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="m-auto" style="width: 50px; height: 50px"><path class="pt-3" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
-            </div>
-        </a>
-        
-        <div class="card_task card-2">
-            <div class="card__icon"><i class="fas fa-bolt"></i></div>
+        {% for task in user_tasks %}
+        <div class="card_task" style="background-color: {{ task.color }}">
             <p class="card__exit"><i class="fas fa-times"></i></p>
-            <h2 class="card__title">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h2>
+            <h2 class="card__title">{{ task.objective }}</h2>
             <p class="card__apply">
-            <a class="card__link" href="#">Work task <i class="fas fa-arrow-right"></i></a>
+            <a class="card__link" href="#">{{task.name}} <i class="fas fa-arrow-right"></i></a>
             </p>
         </div>
-        <div class="card_task card-3">
-            <div class="card__icon"><i class="fas fa-bolt"></i></div>
-            <p class="card__exit"><i class="fas fa-times"></i></p>
-            <h2 class="card__title">Ut enim ad minim veniam.</h2>
-            <p class="card__apply">
-            <a class="card__link" href="#">Work task <i class="fas fa-arrow-right"></i></a>
-            </p>
-        </div>
-        <div class="card_task card-4">
-            <div class="card__icon"><i class="fas fa-bolt"></i></div>
-            <p class="card__exit"><i class="fas fa-times"></i></p>
-            <h2 class="card__title">Quis nostrud exercitation ullamco laboris nisi.</h2>
-            <p class="card__apply">
-            <a class="card__link" href="#">Work task <i class="fas fa-arrow-right"></i></a>
-            </p>
-        </div>
-        <div class="card_task card-5">
-            <div class="card__icon"><i class="fas fa-bolt"></i></div>
-            <p class="card__exit"><i class="fas fa-times"></i></p>
-            <h2 class="card__title">Ut aliquip ex ea commodo consequat. Duis aute irure dolor.</h2>
-            <p class="card__apply">
-            <a class="card__link" href="#">Work task <i class="fas fa-arrow-right"></i></a>
-            </p>
-        </div>
-        <div class="card_task card-1">
-            <div class="card__icon"><i class="fas fa-bolt"></i></div>
-            <p class="card__exit"><i class="fas fa-times"></i></p>
-            <h2 class="card__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-            <p class="card__apply">
-            <a class="card__link" href="#">Work task <i class="fas fa-arrow-right"></i></a>
-            </p>
-        </div>
+        {% endfor %}
+
     </div>
 </div>
 {% endblock %}

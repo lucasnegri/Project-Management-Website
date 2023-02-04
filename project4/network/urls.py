@@ -7,10 +7,7 @@ urlpatterns = [
     ## Define paths for the main projects page and create project formulary
     path("", views.index, name="index"),
     path("create_project", views.create_project, name="create_project"),
-    path("get_team_users/<int:team_id>", views.get_team_users, name="get_team_users"),
-
-
-
+    path("get_team_users/<int:teamId>", views.get_team_users, name="get_team_users"),
 
     ## Define paths for the login, logout and register route 
     path("login", views.login_view, name="login"),
@@ -18,9 +15,12 @@ urlpatterns = [
     path("register", views.register, name="register"),
     
     ## Define paths for the task and assign task route 
-    path("tasks", views.tasks, name="tasks"),
+    path("tasks/", views.tasks, name="tasks"),
     path("create_task", views.create_task, name="create_task"),
-    
+    path("project_tasks/<int:project_id>/", views.project_tasks, name='project_tasks'),
+
+
+
     ## Define paths for the teams page and create teams formulary
     path("teams", views.teams, name="teams"),
     path("create_team", views.create_team, name="create_team")

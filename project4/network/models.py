@@ -28,12 +28,13 @@ class Project(models.Model):
         self.color = self.team.color.lower()
         super().save(*args, **kwargs)
 
+
 class Task(models.Model):
     name = models.CharField(max_length=255)
     objective = models.TextField()
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     color = models.CharField(max_length=7, default=None, null=True, blank=True)
-    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks', default=None, null=True,)
+    assigned_to = models.ManyToManyField(User, related_name='assigned_to')
 
     def save(self, *args, **kwargs):
         self.color = self.project.color.lower()

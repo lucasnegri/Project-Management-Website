@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from .models import User, Team, Project, Task
 
@@ -24,10 +24,7 @@ def create_project(request):
     if request.method == "GET":
         current_user = request.user
         user_teams = current_user.teams.all()
-        default_team = user_teams.first()
-        default_team_members = default_team.members.all()
-        registered_users = User.objects.all()
-        registered_list = [{"username": user.username} for user in registered_users]
+        registered_list = [{"username": user.username} for user in User.objects.all()]
         
         context = {
             "registered_list": registered_list,
@@ -39,7 +36,6 @@ def create_project(request):
         objective = request.POST.get("project_objective")
         selected_team = request.POST.get("selected_team")
         selected_team = Team.objects.get(id=selected_team)
-        selected_team_dict = {"id": selected_team.id, "name": selected_team.name}
         
         selected_users = User.objects.filter(username__in=request.POST.getlist("user[]"))
 
@@ -52,32 +48,70 @@ def create_project(request):
             "project_name":name,
             "project_objective":objective,
             "selected_users": selected_users,
-            "selected_team": selected_team_dict,
+            "selected_team": selected_team,
         }
 
         return redirect(index)
 
-def get_team_users(request, team_id):
-    team = Team.objects.get(id=team_id)
+def get_team_users(request, teamId):
+    team = Team.objects.get(id=teamId)
     users = team.members.all()
     data = {
         "users": [{"username": user.username, "id": user.id} for user in users]
     }
     return JsonResponse(data)
 
+
+
 #-------------------------------------------------------------------------------------------#
+
 
 
 ## Define path to load the tasks page
 def tasks(request):
-    return render(request, "network/tasks.html")
+    user_tasks = Task.objects.filter(assigned_to=request.user)
+    return render(request, "network/tasks.html", {'user_tasks': user_tasks})
+
+
+## Define path to load the tasks from a specific project
+
+def project_tasks(request, project_id):
+    project = Project.objects.get(id=project_id)
+    tasks = Task.objects.filter(project=project)
+    return render(request, 'network/tasks.html',  {'user_tasks': tasks})
+
 
 ## Define path to load the create task formulary
 def create_task(request):
-    return render(request, "network/create_task.html")
+
+    if request.method == "GET":
+        project_id = request.GET.get('project_id')
+        project = Project.objects.get(id=project_id)
+        user_list = project.members.all()
+        return render(request, "network/create_task.html", {'user_list': user_list, 'project_id':project_id})
+    else:
+        name = request.POST.get("task_name")
+        objective = request.POST.get("task_objective")
+        
+        selected_user = User.objects.get(id=request.POST.get("selected_user"))
+
+        project_id = request.POST.get("project_id")
+        project = Project.objects.get(id=project_id)
+
+        task = Task(name=name, objective=objective, project=project)
+        task.save()
+        task.assigned_to.add(selected_user)
+        task.save()
+
+        ##context = {"name":name, "objective":objective, "selected_user":selected_user, "project":project }
+        return redirect(tasks)
+
+        
 
 
 #------------------------------------------------------------------------------------#
+
+
 
 
 ## Define path to load the teams page

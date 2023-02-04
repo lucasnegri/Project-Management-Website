@@ -21,9 +21,9 @@
             </div>
             <div class="team-info col-8">
                 <div class="progress-container">
-                    <div class="progress"></div>
+                    <div class="progress bar_color_{{ team.id }}"></div>
                     <span class="progress-text">
-                        6/9 Tasks
+                        {{ team.project_set.count }}/{{ team.project_set.all.count }} Projects
                     </span>
                 </div>
                 <h6>Objective</h6>
@@ -32,6 +32,12 @@
             </div>
         </div>
     </div>
+    <style>
+        .bar_color_{{ team.id }}::after {
+            background-color: {{ team.color }};
+        }
+    </style>
     {% endfor %}
+
 </div>
 {% endblock %}
