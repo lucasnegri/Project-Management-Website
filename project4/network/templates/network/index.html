@@ -18,7 +18,7 @@
             <div>
                 <h1>{{ project.name }}</h1>
                 <p>{{ project.objective }}</p>   
-                <div class="date">6 Oct 2017</div>
+                <div class="date">{{ project.completed_tasks_count }}/{{ project.task_set.all.count }} Tasks</div>
                 <div class="tags">
                     <div class="btn task_button text-white mx-2" style="background-color: {{ project.color }}"; onclick="viewTasks({{project.id}})">View Tasks</div>
                     <div class="btn task_button text-white mx-2" style="background-color: {{ project.color }}"; onclick="createTask({{project.id}})">Create Task</div>

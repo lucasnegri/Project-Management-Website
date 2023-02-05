@@ -17,18 +17,18 @@
             <div class="team-preview col-4" style="background-color: {{ team.color }}">
                 <h6>Team Name</h6>
                 <h2>{{ team.name }}</h2>
-                <a href="#">View all chapters <i class="fas fa-chevron-right"></i></a>
+                <a href="#" onclick="viewProjects({{ team.id }})">View all projects <i class="fas fa-chevron-right"></i></a>
             </div>
             <div class="team-info col-8">
                 <div class="progress-container">
                     <div class="progress bar_color_{{ team.id }}"></div>
                     <span class="progress-text">
-                        {{ team.project_set.count }}/{{ team.project_set.all.count }} Projects
+                        {{ team.completed_projects_count }}/{{ team.project_set.all.count }} Projects
                     </span>
                 </div>
                 <h6>Objective</h6>
                 <p>{{ team.objective }}</p>
-                <button class="btn btn_team" style="background-color: {{ team.color }}">Continue</button>
+                <button class="btn btn_team" style="background-color: {{ team.color }}">Manage</button>
             </div>
         </div>
     </div>
@@ -38,6 +38,13 @@
         }
     </style>
     {% endfor %}
+
+    <script>
+    function viewProjects(teamId) {
+        window.location.href = "/team_projects/" + teamId + "/";
+    }
+
+    </script>
 
 </div>
 {% endblock %}

@@ -12,37 +12,33 @@ from .models import User
 
 ## Define path to load the main page (projects)
 def index(request):
-    current_user = request.user
-    projects = current_user.projects.all()
+    projects = request.user.projects.all()
     context = {
         'projects': projects
     }
     return render(request, "network/index.html", context)
 
+
 ## Define path to load the create project formulary
 def create_project(request):
     if request.method == "GET":
-        current_user = request.user
-        user_teams = current_user.teams.all()
-        registered_list = [{"username": user.username} for user in User.objects.all()]
-        
         context = {
-            "registered_list": registered_list,
-            "user_teams": user_teams,
+            "registered_list": [{"username": user.username} for user in User.objects.all()],
+            "user_teams": request.user.teams.all(),
         }
         return render(request, "network/create_project.html", context)
     else:
         name = request.POST.get("project_name")
         objective = request.POST.get("project_objective")
-        selected_team = request.POST.get("selected_team")
-        selected_team = Team.objects.get(id=selected_team)
-        
+        selected_team = Team.objects.get(id=request.POST.get("selected_team"))
         selected_users = User.objects.filter(username__in=request.POST.getlist("user[]"))
 
-        project = Project(name=name, objective=objective, team=selected_team)
-        project.save()
+        project = Project.objects.create(
+            name=name, 
+            objective=objective, 
+            team=selected_team
+        )
         project.members.set(selected_users)
-        project.save()
 
         context = {
             "project_name":name,
@@ -53,6 +49,7 @@ def create_project(request):
 
         return redirect(index)
 
+## Pass user list when user select  team on create project form
 def get_team_users(request, teamId):
     team = Team.objects.get(id=teamId)
     users = team.members.all()
@@ -63,13 +60,13 @@ def get_team_users(request, teamId):
 
 
 
-#-------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------------#
 
 
 
 ## Define path to load the tasks page
 def tasks(request):
-    user_tasks = Task.objects.filter(assigned_to=request.user)
+    user_tasks = Task.objects.filter(assigned_to=request.user, is_completed=False)
     return render(request, "network/tasks.html", {'user_tasks': user_tasks})
 
 
@@ -83,7 +80,6 @@ def project_tasks(request, project_id):
 
 ## Define path to load the create task formulary
 def create_task(request):
-
     if request.method == "GET":
         project_id = request.GET.get('project_id')
         project = Project.objects.get(id=project_id)
@@ -92,23 +88,31 @@ def create_task(request):
     else:
         name = request.POST.get("task_name")
         objective = request.POST.get("task_objective")
-        
         selected_user = User.objects.get(id=request.POST.get("selected_user"))
 
-        project_id = request.POST.get("project_id")
-        project = Project.objects.get(id=project_id)
+        project = Project.objects.get(id=request.POST.get("project_id"))
 
-        task = Task(name=name, objective=objective, project=project)
-        task.save()
+        task = Task.objects.create(name=name,objective=objective,project=project)
         task.assigned_to.add(selected_user)
-        task.save()
+        project.is_completed = False
+        project.save()
 
         ##context = {"name":name, "objective":objective, "selected_user":selected_user, "project":project }
         return redirect(tasks)
 
-        
 
+## Mark task as completed
+def mark_task_as_completed(request, task_id):
+    task = Task.objects.get(id=task_id)
+    task.is_completed = True
+    task.save()
 
+    project = task.project
+    if project.is_all_tasks_completed():
+        project.is_completed = True
+        project.save()
+
+    return redirect(tasks)
 #------------------------------------------------------------------------------------#
 
 
@@ -119,9 +123,17 @@ def teams(request):
     current_user = request.user
     teams = current_user.teams.all()
     context = {
-        'teams': teams
+        'teams': teams,
     }
     return render(request, "network/teams.html", context)
+
+
+## Define path to load the projects page of a specific team
+def team_projects(request, team_id):
+    team =Team.objects.get(id=team_id)
+    projects = Project.objects.filter(team=team)
+    return render(request, 'network/index.html',  {'projects': projects})
+
 
 ## Define path to load the create team formulary
 def create_team(request):
@@ -142,9 +154,6 @@ def create_team(request):
         team = Team(name=name, objective=objective, color=color)
         team.save()
         team.members.set(selected_users)
-        team.save()
-
-        registered_users = User.objects.all()
         
         current_user = request.user
         teams = current_user.teams.all()

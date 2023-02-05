@@ -18,10 +18,11 @@ urlpatterns = [
     path("tasks/", views.tasks, name="tasks"),
     path("create_task", views.create_task, name="create_task"),
     path("project_tasks/<int:project_id>/", views.project_tasks, name='project_tasks'),
-
+    path('mark_task_as_completed/<int:task_id>/', views.mark_task_as_completed, name='mark_task_as_completed'),
 
 
     ## Define paths for the teams page and create teams formulary
     path("teams", views.teams, name="teams"),
-    path("create_team", views.create_team, name="create_team")
+    path("create_team", views.create_team, name="create_team"),
+    path("team_projects/<int:team_id>/", views.team_projects, name='team_projects')
 ]
