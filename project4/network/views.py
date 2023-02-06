@@ -98,8 +98,8 @@ def create_task(request):
 
         task = Task.objects.create(name=name,objective=objective,project=project)
         task.assigned_to.add(selected_user)
-        project.is_completed = False
         project.save()
+        task.project.is_completed = False
 
         ##context = {"name":name, "objective":objective, "selected_user":selected_user, "project":project }
         return redirect(tasks)

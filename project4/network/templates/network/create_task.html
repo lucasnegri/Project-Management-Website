@@ -26,22 +26,21 @@
 
         <!--Users list-->
         <div class="card-body pt-2">
-            <label for="user_checkbox"><b>User</b></label>
             <!--Users checkboxes-->
+            <label for="user_checkbox"><b>Assign to:</b></label>
             <div id="user_checkbox">
-            <!--List of teams that the user is in-->
-            <select id="selected_user" name="selected_user">
-                {% for user in user_list %}
-                    <option value="{{ user.id }}">{{ user.username }}</option>
-                {% endfor %}
-            </select>
-            
+                <!--List of teams that the user is in-->
+                <select id="selected_user" name="selected_user" class="form-control">
+                    {% for user in user_list %}
+                        <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
             </div>
         </div>
 
         <!--Submit button-->
         <div class="d-flex justify-content-center pt-2">
-            <button type="submit" class="btn btn-dark">Assign task</button>
+            <button type="submit" class="btn btn-dark">Assign</button>
         </div>
         </form>
     </div>

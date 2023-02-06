@@ -28,8 +28,8 @@ document.getElementById("selected_team").addEventListener("change", function() {
           data.users.forEach(user => {
               usersCheckbox.innerHTML += `
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="checkbox1" name="user[]" value="{{ user.username }}">
-                    <label class="form-check-label" for="checkbox1">{{ user.username }}</label>
+                    <input type="checkbox" class="form-check-input" id="checkbox1" name="user[]" value="${ user.username }">
+                    <label class="form-check-label" for="checkbox1">${user.username }</label>
                 </div>
               `;
           });

@@ -37,7 +37,7 @@
       {% for user in user_list %}
             <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="checkbox1" name="user[]" value="{{ user.id }}">
-              <label class="form-check-label" for="checkbox1">{{ user.username }}</label>
+              <label class="form-check-label" for="checkbox1">{{ user.name }}</label>
             </div>
       {% endfor %}
       </div>
