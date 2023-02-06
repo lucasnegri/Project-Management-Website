@@ -26,6 +26,11 @@ a {
   color: inherit;
 }
 
+.active {
+  background-color: black;
+  color: white;
+}
+
 .cards-wrapper {
   margin: 0 auto;
   overflow-x: scroll;

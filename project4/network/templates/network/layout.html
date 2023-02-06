@@ -23,13 +23,13 @@
                     {% if user.is_authenticated %}
                     <div class="row">
                         <li class="col nav-item">
-                            <a class="nav_link button_header" href="{% url 'teams' %}">Teams</a>
+                            <a class="nav_link button_header {% if request.path == '/teams' %}active{% endif %}" href="{% url 'teams' %}">Teams</a>
                         </li>
                         <li class="col nav-item">
-                            <a class="nav_link button_header" href="{% url 'index' %}">Projects</a>
+                            <a class="nav_link button_header {% if request.path == '/' %}active{% endif %}" href="{% url 'index' %}">Projects</a>
                         </li>
                         <li class="col nav-item">
-                            <a class="nav_link button_header" href="{% url 'tasks' %}">Tasks</a>
+                            <a class="nav_link button_header {% if request.path == '/tasks/' %}active{% endif %}" href="{% url 'tasks' %}">Tasks</a>
                         </li>
                         <li class="col nav-item">
                             <a class="nav_link button_header border-dark" href="{% url 'logout' %}">Logout</a>
@@ -39,6 +39,13 @@
                 </ul>
         </nav>
 
+        <style>
+        .active {
+            background-color: black;
+            color: white;
+          }
+        </style>
+        
         {% block body %}
         {% endblock %}
 
