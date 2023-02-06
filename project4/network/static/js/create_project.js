@@ -27,10 +27,10 @@ document.getElementById("selected_team").addEventListener("change", function() {
           usersCheckbox.innerHTML = "";
           data.users.forEach(user => {
               usersCheckbox.innerHTML += `
-                  <div class="form-check mb-1">
-                      <input class="form-check-input" id="flexCheck1" name="user[]" value="${user.username}" type="checkbox">
-                      <label class="form-check-label" for="flexCheck1"><span class="fst-italic pl-1">${user.username}</span></label>
-                  </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="checkbox1" name="user[]" value="{{ user.username }}">
+                    <label class="form-check-label" for="checkbox1">{{ user.username }}</label>
+                </div>
               `;
           });
       });
