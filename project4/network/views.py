@@ -13,8 +13,10 @@ from .models import User
 ## Define path to load the main page (projects)
 def index(request):
     projects = request.user.projects.all()
+    message= "All projects"
     context = {
-        'projects': projects
+        'projects': projects,
+        'message':message
     }
     return render(request, "network/index.html", context)
 
@@ -67,7 +69,8 @@ def get_team_users(request, teamId):
 ## Define path to load the tasks page
 def tasks(request):
     user_tasks = Task.objects.filter(assigned_to=request.user, is_completed=False)
-    return render(request, "network/tasks.html", {'user_tasks': user_tasks})
+    message = "All tasks"
+    return render(request, "network/tasks.html", {'user_tasks': user_tasks, 'message':message})
 
 
 ## Define path to load the tasks from a specific project
@@ -75,7 +78,8 @@ def tasks(request):
 def project_tasks(request, project_id):
     project = Project.objects.get(id=project_id)
     tasks = Task.objects.filter(project=project)
-    return render(request, 'network/tasks.html',  {'user_tasks': tasks})
+    message = "{} project tasks".format(project.name)
+    return render(request, 'network/tasks.html',  {'user_tasks': tasks, 'message':message})
 
 
 ## Define path to load the create task formulary
@@ -132,7 +136,8 @@ def teams(request):
 def team_projects(request, team_id):
     team =Team.objects.get(id=team_id)
     projects = Project.objects.filter(team=team)
-    return render(request, 'network/index.html',  {'projects': projects})
+    message = "'{}' projects".format(team.name)
+    return render(request, 'network/index.html',  {'projects': projects, 'message':message})
 
 
 ## Define path to load the create team formulary
