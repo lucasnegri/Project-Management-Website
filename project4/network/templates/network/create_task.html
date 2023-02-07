@@ -7,41 +7,41 @@
     <div class="container form_card m-auto px-5 py-3">
     <!--CREATE TASK FORMULARY-->
         <form id="create_task" action="{% url 'create_task' %}" method="post" class="m-2">
-        {% csrf_token %}
-        <h2 class="pb-3">Assign Task</h2>
-        <input name="project_id" value="{{ project_id }}" readonly hidden>
+            {% csrf_token %}
+            <h2 class="pb-3">Assign Task</h2>
+            <input name="project_id" value="{{ project_id }}" readonly hidden>
 
 
-        <!--task Name-->
-        <div class="form-group">
-            <label for="task_input"><b>Name</b></label>
-            <input type="text" class="form-control" id="task_input" name="task_name" placeholder="Name your task"  maxlength="15">
-        </div>
-
-        <!--task Objective-->
-        <div class="form-group">
-            <label for="objective_input"><b>Objectives</b></label>
-            <textarea class="form-control" id="objective_input" name="task_objective" rows="2"></textarea>
-        </div>
-
-        <!--Users list-->
-        <div class="card-body pt-2">
-            <!--Users checkboxes-->
-            <label for="user_checkbox"><b>Assign to:</b></label>
-            <div id="user_checkbox">
-                <!--List of teams that the user is in-->
-                <select id="selected_user" name="selected_user" class="form-control">
-                    {% for user in user_list %}
-                        <option value="{{ user.id }}">{{ user.username }}</option>
-                    {% endfor %}
-                </select>
+            <!--Task Name-->
+            <div class="form-group">
+                <label for="task_input"><b>Name</b></label>
+                <input type="text" class="form-control" id="task_input" name="task_name" placeholder="Name your task"  maxlength="15">
             </div>
-        </div>
 
-        <!--Submit button-->
-        <div class="d-flex justify-content-center pt-2">
-            <button type="submit" class="btn btn-dark">Assign</button>
-        </div>
+            <!--Task Objective-->
+            <div class="form-group">
+                <label for="objective_input"><b>Objectives</b></label>
+                <textarea class="form-control" id="objective_input" name="task_objective" rows="2"></textarea>
+            </div>
+
+            <!--Users list-->
+            <div class="card-body pt-2">
+                <!--Users checkboxes-->
+                <label for="user_checkbox"><b>Assign to:</b></label>
+                <div id="user_checkbox">
+                    <!--List of teams that the user is in-->
+                    <select id="selected_user" name="selected_user" class="form-control">
+                        {% for user in user_list %}
+                            <option value="{{ user.id }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <!--Submit button-->
+            <div class="d-flex justify-content-center pt-2">
+                <button type="submit" class="btn btn-dark">Assign</button>
+            </div>
         </form>
     </div>
 

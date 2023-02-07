@@ -1,3 +1,5 @@
+
+// Function to change the active status of each header button
 const buttons = document.querySelectorAll(".nav_link.button_header");
 
 buttons.forEach(button => {

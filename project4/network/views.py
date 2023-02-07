@@ -21,7 +21,7 @@ def index(request):
     return render(request, "network/index.html", context)
 
 
-## Define path to load the create project formulary
+## Define path to process the "create_project" request
 def create_project(request):
     if request.method == "GET":
         context = {
@@ -82,7 +82,7 @@ def project_tasks(request, project_id):
     return render(request, 'network/tasks.html',  {'user_tasks': tasks, 'message':message})
 
 
-## Define path to load the create task formulary
+## Define path to process the "create_taks" request
 def create_task(request):
     if request.method == "GET":
         project_id = request.GET.get('project_id')
@@ -140,7 +140,7 @@ def team_projects(request, team_id):
     return render(request, 'network/index.html',  {'projects': projects, 'message':message})
 
 
-## Define path to load the create team formulary
+## Define path to process the "create_team" request
 def create_team(request):
     if request.method == "GET":
         registered_users = User.objects.all()

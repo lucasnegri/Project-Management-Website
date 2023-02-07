@@ -11,17 +11,20 @@
         </a>
     </div>
     
+    <!--Load a container for each team that the user is in-->
     {% for team in teams %}
     <div class="team_container">
         <div class="team row">
             <div class="team-preview col-4" style="background-color: {{ team.color }}">
                 <h6>Team Name</h6>
                 <h2>{{ team.name }}</h2>
+                <!--Call handler to view the projects of that specific team-->
                 <a href="#" onclick="viewProjects({{ team.id }})">View all projects <i class="fas fa-chevron-right"></i></a>
             </div>
             <div class="team-info col-8">
                 <div class="progress-container">
                     <div class="progress bar_color_{{ team.id }}"></div>
+                    <!--When a task is saved, it update the is_complete status of the project, updating the html here-->
                     <span class="progress-text">
                         {{ team.completed_projects_count }}/{{ team.project_set.all.count }} Projects
                     </span>
@@ -32,6 +35,7 @@
             </div>
         </div>
     </div>
+    <!--Style to make each progress bar inherit the team.color-->
     <style>
         .bar_color_{{ team.id }}::after {
             background-color: {{ team.color }};
@@ -39,12 +43,12 @@
     </style>
     {% endfor %}
 
+
+    <!--Event handler to call the team_projects request of that specific team-->
     <script>
-    function viewProjects(teamId) {
-        window.location.href = "/team_projects/" + teamId + "/";
-    }
-
+        function viewProjects(teamId) {
+            window.location.href = "/team_projects/" + teamId + "/";
+        }
     </script>
-
 </div>
 {% endblock %}

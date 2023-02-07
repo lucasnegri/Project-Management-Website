@@ -1,5 +1,5 @@
 
-
+// Function to load the page when a "create_team" is called. When the page first loads, it update the user_list with the team.members
 window.addEventListener("load", function() {
     const firstTeam = document.querySelector("#selected_team option:first-child").value;
     fetch(`get_team_users/${firstTeam}`)
@@ -18,6 +18,7 @@ window.addEventListener("load", function() {
 });
 
 
+// Function to update user_list being passed when the user select a "team" on the selection input
 document.getElementById("selected_team").addEventListener("change", function() {
   const teamId = this.value;
   fetch(`/get_team_users/${teamId}`)
