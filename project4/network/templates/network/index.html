@@ -17,7 +17,7 @@
     <div class="card-grid-space col pb-4">
         <a class="project_card m-auto project_{{ project.id }}" style="border-color: {{ project.color }}; border-width: 2px;">
             <div>
-                <h1>{{ project.name }}</h1>
+                <h3><b>{{ project.name }}</b></h3>
                 <p>{{ project.objective }}</p>   
                 {% if project.is_completed %}
                     <div class="date">Completed</div>

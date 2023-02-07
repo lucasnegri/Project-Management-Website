@@ -8,7 +8,7 @@
     <!--CREATE TASK FORMULARY-->
         <form id="create_task" action="{% url 'create_task' %}" method="post" class="m-2">
         {% csrf_token %}
-        <h2 class="pb-3">Create Task</h2>
+        <h2 class="pb-3">Assign Task</h2>
         <input name="project_id" value="{{ project_id }}" readonly hidden>
 
 
