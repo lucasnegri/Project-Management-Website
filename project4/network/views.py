@@ -168,7 +168,11 @@ def create_team(request):
         return render(request, "network/teams.html", context)
 
 
-
+## Define path to process the "manage_team" request
+def manage_team(request, teamId):
+    team = get_object_or_404(Team, id=teamId)
+    return render(request, 'network/manage_team.html', {'team': team})
+    
 #------------------------------------------------------------------------------------#
 
 

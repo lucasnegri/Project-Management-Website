@@ -31,7 +31,7 @@
                 </div>
                 <h6>Objective</h6>
                 <p>{{ team.objective }}</p>
-                <button class="btn btn_team" style="background-color: {{ team.color }}">Manage</button>
+                <button class="btn btn_team" style="background-color: {{ team.color }}" onclick="manageTeam({{ team.id }})">Manage</button>
             </div>
         </div>
     </div>
@@ -48,6 +48,10 @@
     <script>
         function viewProjects(teamId) {
             window.location.href = "/team_projects/" + teamId + "/";
+        }
+
+        function manageTeam(teamId) {
+            window.location.href = `/manage_team/${teamId}`;
         }
     </script>
 </div>
