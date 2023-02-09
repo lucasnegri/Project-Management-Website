@@ -1,27 +1,40 @@
 {% extends "network/layout.html" %}
-
+{% load static %}
 {% block body %}
 
 
-<div class="card container p-3">
-    <h3 class="text-center">{{ team.name }}</h3>
-    <div class="row">
-      <div class="left-side p-3 mr-3">
+
+
+<div class="card container mt-4 p-3 w-75 rounded">
+    <h3 class="text-center pt-3">{{ team.name }}</h3>
+    <div class="row p-5">
+      <div class="col p-5 mr-3">
         <h5>Information</h5>
         <p>Projects: {{ team.project_set.all.count }}</p>
         <p>Projects Completed: {{ team.completed_projects_count }}</p>
         <p>Members: {{ team.members.count }}</p>
         <p>Objective: {{ team.objective }}</p>
       </div>
-      <div class="right-side p-3">
+      
+      <div class="col p-5 text-center">
         <h5>Members</h5>
-        <ul>
-          {% for member in team.members.all %}
-          <li>{{ member.username }}</li>
+        <div id="user-list">
+          {% for member in all_users %}
+            <div class="row {% if member in team.members.all %}bg-danger{% else %}bg-primary{% endif %} rounded d-flex align-items-center justify-content-between px-3 mx-4 mb-2">
+              <p class="h5 text-white text-center">{{ member.username }}</p>
+                {% if member in team.members.all %}
+                  <svg class="manage_icon removeMember" onclick="removeMember(event, {{ member.id }}, {{ team.id }})" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 256c0 17.7-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>
+                {% else %}
+                  <svg class="manage_icon addMember" onclick="addMember(event, {{ member.id }}, {{ team.id }})" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"/></svg>
+                {% endif %}
+            </div>
           {% endfor %}
-        </ul>
+        </div>
       </div>
     </div>
   </div>
 
+
+
 {% endblock %}
+
