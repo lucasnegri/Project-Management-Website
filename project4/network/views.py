@@ -169,7 +169,7 @@ def project_tasks(request, project_id):
 
 ## Define path to process the "create_taks" request
 def create_task(request):
-    if request.method == "GET":
+    if request.method == "GET": 
         project_id = request.GET.get('project_id')
         project = Project.objects.get(id=project_id)
         user_list = project.members.all()
