@@ -17,20 +17,30 @@
           <p><b>Projects Completed:</b> {{ team.completed_projects_count }}</p>
           <p><b>Members:</b> {{ team.members.count }}</p>
           <p><b>Objective:</b> {{ team.objective }}</p>
+          <p><b>Leader:</b> {{ team.created_by }}</p>
         </div>
       </div>
       
       <div class="col text-center">
         <h5 class="pb-3">Members</h5>
-        <div id="user-list"   >
+        <div id="user-list">
           {% for member in all_users %}
             <div class="user_card row rounded d-flex align-items-center justify-content-between px-3 mx-4 mb-3" {% if member in team.members.all %}style="background-color: {{team.color}}" {% else %}style="background-color: white"{% endif %}>
-              {% if member in team.members.all %}
-                <p class="h5 text-white text-center">{{ member.username }}</p>
-                <svg class="manage_icon removeMember" onclick="removeMember(event, {{ member.id }}, {{ team.id }})" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 256c0 17.7-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>
+              {% if user == team.created_by %}
+                {% if member in team.members.all %}
+                    {% if member == team.created_by %}
+                      <p class="h5 text-white text-center">{{ member.username }}</p>
+                      <svg class="manage_icon" style="fill: white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H426.6c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"/></svg>
+                    {% else %}
+                      <p class="h5 text-white text-center">{{ member.username }}</p>
+                      <svg class="manage_icon removeMember" style="fill: white" onclick="removeMember(event, {{ member.id }}, {{ team.id }})" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 256c0 17.7-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>
+                    {% endif %}
+                {% else %}
+                  <p class="h5 text-center">{{ member.username }}</p>
+                  <svg class="manage_icon addMember" style="fill: {{team.color}}" onclick="addMember(event, {{ member.id }}, {{ team.id }})" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"/></svg>
+                {% endif %}
               {% else %}
-                <p class="h5 text-center">{{ member.username }}</p>
-                <svg class="manage_icon addMember" onclick="addMember(event, {{ member.id }}, {{ team.id }})" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"/></svg>
+                <p class="h5 text-center text-white">{{ member.username }}</p>
               {% endif %}
             </div>
           {% endfor %}

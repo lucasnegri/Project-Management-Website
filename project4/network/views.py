@@ -241,7 +241,7 @@ def create_team(request):
         color = request.POST["team_color"]
         selected_users = User.objects.filter(username__in=request.POST.getlist("user[]"))
 
-        team = Team(name=name, objective=objective, color=color)
+        team = Team(name=name, objective=objective, color=color, created_by=request.user)
         team.save()
         team.members.set(selected_users)
         
