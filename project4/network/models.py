@@ -11,7 +11,8 @@ class Team(models.Model):
     objective = models.TextField()
     color = models.CharField(max_length=7)
     members = models.ManyToManyField(User, related_name='teams', default=None, null=True,)
-    
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='created_teams')
+
     def save(self, *args, **kwargs):
         self.color = self.color.lower()
         super().save(*args, **kwargs)

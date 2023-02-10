@@ -8,6 +8,10 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("create_project", views.create_project, name="create_project"),
     path("get_team_users/<int:teamId>", views.get_team_users, name="get_team_users"),
+    path("manage_team/<int:teamId>", views.manage_team, name="manage_team"),
+    path('manage_team/<int:team_id>/add_member/<int:user_id>', views.add_member, name='add_member'),
+    path('manage_team/<int:team_id>/remove_member/<int:user_id>', views.remove_member, name='remove_member'),
+
 
     ## Define paths for the login, logout and register route 
     path("login", views.login_view, name="login"),
