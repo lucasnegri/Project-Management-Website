@@ -69,6 +69,9 @@ This template displays all the projects associated with a specific team. It uses
 **create_team.html**
 This template is used to display the create team form. It includes form fields for the team name, objective, color, and members. The form is submitted to the create_team view, which processes the form data and creates the new team.
 
+**manage_Team.html** 
+This template is used to display a view of a specific team for the user. It shows all the information about that team and a list. If the current user is the creator of the team, it should let that administrator to add/remove users from the team.
+
 
 ***
 
@@ -115,3 +118,12 @@ This function displays all the projects associated with a specific team. It take
 
 #### create_team
 The create_team function creates a new team. If a GET request is made, it retrieves all registered users and displays them in a list. If a POST request is made, the function retrieves the team name, objective, color, and members from the request, creates a new team object with these properties, saves it to the database, and returns a page showing all teams including the newly created one.
+
+#### manage_team
+This code defines a path that handles the "manage_team" request. When this path is hit, the following actions are performed: It fetches the team object using the id passed in the URL. It retrieves a list of all users using the User model. It returns a rendered HTML template "network/manage_team.html", passing the team and all_users data.
+
+#### add_member
+The add_member function adds a user to a specific team. It retrieves the specified user and team by their IDs, then adds the user to the team's member list. Finally, it returns a JSON response containing an updated list of all users.
+
+#### remove_member
+The remove_member function removes a user from a specific team. It retrieves the specified user and team by their IDs, then removes the user from the team's member list. Finally, it returns a JSON response containing an updated list of all users.
