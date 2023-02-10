@@ -84,9 +84,7 @@ def add_member(request, member_id, team_id):
 
     # Render the updated member list
     all_users = User.objects.all().values()
-    context = {
-        "all_users":all_users
-    }
+    context = {"all_users":all_users}
     return JsonResponse(context)
 
 
