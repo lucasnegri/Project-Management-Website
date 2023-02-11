@@ -23,7 +23,7 @@ Overall, the combination of distinctiveness and complexity make this project man
 ***
 
 ## Objective
-This project is a web-based application designed to help users manage teams, projects, and tasks in a single platform. It satisfies the distinctiveness and complexity requirements as it provides a user-friendly interface to manage multiple projects with various teams and members, making it possible to assign tasks to individuals within those projects. This application is built using HTML, CSS, JavaScript, and Django, which makes it a challenging and complex project.
+This project is a web-based application designed to help users manage teams by adding/removing users, creating projects and assigning tasks in a single platform. It satisfies the distinctiveness and complexity requirements as it provides a user-friendly interface to manage multiple projects with various teams and members, making it possible to assign tasks to individuals within those projects. This application is built using HTML, CSS, JavaScript, and Django, which makes it a challenging and complex project.
 
 ***
 
