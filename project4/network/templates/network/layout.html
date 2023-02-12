@@ -44,21 +44,22 @@
                 </ul>
         </nav>
 
-        <!--STYLE FOR HEADER HEADER -->
+        <!--STYLE FOR ACTIVE HEADER -->
         <style>
-        .active {
-            background-color: black;
-            color: white;
-        }
+            .active {
+                background-color: black;
+                color: white;
+            }
         </style>
         
+        <!-- LOADED TEMPLATE -->
         {% block body %}
         {% endblock %}
 
+        <!-- JAVASCRIPT FILES -->
         <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
         <script src="{% static 'js/jscolor.js' %}"></script>
         <script src="{% static 'js/main.js' %}"></script>
         <script src="{% static 'js/manage_team.js' %}"></script>
-
     </body>
 </html>
