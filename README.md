@@ -17,7 +17,11 @@ Overall, the combination of distinctiveness and complexity make this project man
 - Migrate the models to create the database tables using `python manage.py migrate`.
 - Run the development server using `python manage.py runserver`.
 - Open the application in your web browser at our local host address.
-- Additional Information:
+
+
+***
+
+## Additional information:  
 - This project is a part of the CS50 Web Programming with Python and JavaScript course, and the objective was to create a project management website. The application is built using Django and JavaScript and provides functionalities to create teams, projects, and tasks. The interface is designed to be user-friendly, making it easy to manage multiple projects with various teams and members. 
 
 ***
