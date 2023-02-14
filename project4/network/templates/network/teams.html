@@ -24,10 +24,13 @@
             <div class="team-info col-8">
                 <div class="progress-container">
                     <div class="progress bar_color_{{ team.id }}"></div>
-                    <!--When a task is saved, it update the is_complete status of the project, updating the html here-->
-                    <span class="progress-text">
-                        {{ team.completed_projects_count }}/{{ team.project_set.all.count }} Projects
-                    </span>
+                    {% if team.project_set.all.count > 0 %}
+                        <span class="progress-text">
+                            {{ team.completed_projects_count }}/{{ team.project_set.all.count }} Projects
+                        </span>
+                    {% else %}
+                        <span class="progress-text">No Projects yet</span>
+                    {% endif %}
                 </div>
                 <h6>Objective</h6>
                 <p>{{ team.objective }}</p>
