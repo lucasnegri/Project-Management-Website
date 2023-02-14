@@ -4,21 +4,37 @@
 
 
 
-
-<div class="card container mt-4 p-5 w-50 rounded shadow-lg" style="border: 2px solid {{team.color}}">
+<div class="card container mt-4 p-5 w-75 rounded shadow-lg" style="border: 2px solid {{team.color}}">
     <h3 class="text-center" style="color: {{ team.color }}">{{ team.name }}</h3>
     <hr class="w-50 m-auto" style="background-color: {{ team.color }}">
     
-    <div class="row pt-5 d-flex justify-content-center">  
-      <div class="col pl-5 ml-5">
-        <h5 class="pb-3">Information</h5>
-        <div class="">
-          <p><b>Projects:</b> {{ team.project_set.all.count }}</p>
-          <p><b>Projects Completed:</b> {{ team.completed_projects_count }}</p>
-          <p><b>Members:</b> {{ team.members.count }}</p>
-          <p><b>Objective:</b> {{ team.objective }}</p>
-          <p><b>Leader:</b> {{ team.created_by }}</p>
-        </div>
+    <div class="row pt-5 w-75 mx-auto">  
+      <div class="col">
+        <h5 class="pb-3 text-center ">Information</h5>
+        <table class="table table-striped" style="border: 2px solid {{team.color}}">
+          <tbody>
+            <tr style="background-color: rgba({{team.color}}, 0.5)">
+              <th scope="row">Projects</th>
+              <td>{{ team.project_set.all.count }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Completed</th>
+              <td>{{ team.completed_projects_count }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Objective</th>
+              <td>{{ team.objective }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Leader</th>
+              <td>{{ team.created_by }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Members</th>
+              <td>{{ team.members.count }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       
       <div class="col text-center">
